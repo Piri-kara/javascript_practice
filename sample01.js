@@ -34,3 +34,57 @@
 // document.write('<p>半径 5cm の円の面積は ' + areaOfCircle(5) + 'です。</p>');
 // document.write('<p>半径 10cm の円の面積は ' + areaOfCircle(10) + 'です。</p>');
 // document.write('<p>半径 15cm の円の面積は ' + areaOfCircle(15) + 'です。</p>');
+
+
+
+// var startTIme = null;
+// var displayArea = document.getElementById('display-area');
+
+// 上記のコードをオブジェクトに！
+// gameオブジェクトは開始時間と表示エリアという要素を共通で持っている
+// var game = {
+//   startTime: null,
+//   displayArea: document.getElementById('display-area')
+// }
+
+// function start(){
+//   // 開始時刻の取得
+//   game.startTime = Date.now();
+//   // HTML上で何かキーが押されたら、stop関数を呼び出す
+//   document.body.onkeypress = stop;
+// }
+// function stop(){
+//   var currentTIme = Date.now();
+//   var seconds = (currentTIme - game.startTime) / 1000;
+//   if (9.5 <= seconds && seconds <= 10.5 ){
+//     game.displayArea.innerText = seconds + '秒でした。すごい！'
+//   } else {
+//     game.displayArea.innerText = seconds + '秒でした。残念！'
+//   }
+// }
+// // confirmはalertと同様に引数で渡した文字列をダイアログで表示する
+// // confirmではボタンがOKとキャンセルの2つに増える
+// if (confirm('OKを押して10秒だと思ったら何かキーを押してください')){
+//   start();
+// }
+
+var game = {
+  startTime: null,
+  displayArea: document.getElementById('display-area'),
+  start: function(){
+    game.startTime = Date.now();
+    document.body.onkeypress = game.stop;
+  },
+  stop: function(){
+    var currentTime = Date.now();
+    var seconds = (currentTime - game.startTime) / 1000;
+    if (9.5 <= seconds && seconds <= 10.5){
+      game.displayArea.innerText = seconds + '秒でした。すごい！'
+    } else {
+      game.displayArea.innerText = seconds + '秒でした。残念！'
+    }
+  }
+}
+if (confirm('OKを押して10秒だと思ったら何かのキーを押してください')){
+  game.start();
+}
